@@ -88,7 +88,7 @@ export default function Contact() {
               <h3 className="section-label mb-4">Social</h3>
               <div className="flex gap-3">
                 {['Instagram', 'Pinterest', 'Behance'].map((s) => (
-                  <a key={s} href="#" className="text-xs uppercase tracking-widest text-[#999999] hover:text-[#c9a84c] transition-colors border border-[#333333] hover:border-[#c9a84c] px-3 py-1.5">
+                  <a key={s} href="https://www.instagram.com/reyaaa_sn/?utm_source=ig_web_button_share_sheet" className="text-xs uppercase tracking-widest text-[#999999] hover:text-[#c9a84c] transition-colors border border-[#333333] hover:border-[#c9a84c] px-3 py-1.5">
                     {s}
                   </a>
                 ))}
