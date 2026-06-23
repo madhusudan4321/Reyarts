@@ -1,3 +1,5 @@
+# ── Frontend .gitignore ──────────────────────────────────────────
+
 # Logs
 logs
 *.log
@@ -7,10 +9,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
-*.local
+
+# Environment variables (NEVER push — contains secrets)
+.env
+.env.local
+.env.development
+.env.production
+# .env.example is SAFE to push (template with no real secrets)
 
 # Editor directories and files
 .vscode/*

@@ -1,0 +1,46 @@
+# ── Root .gitignore ─────────────────────────────────────────────
+
+# Dependencies (both frontend and backend covered here too)
+node_modules/
+
+# Environment variable files (NEVER push — contains secrets)
+.env
+.env.local
+.env.development
+.env.production
+# NOTE: .env.example IS safe to push (it's a template with no real secrets)
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# Build output
+dist/
+build/
+dist-ssr/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+
+# Optional: coverage reports
+coverage/

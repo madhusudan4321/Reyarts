@@ -8,44 +8,24 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Artwork image storage
 const artworkStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'reyarts/artworks',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ quality: 'auto', fetch_format: 'auto' }],
-  },
+  params: { folder: 'reyarts/artworks', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
 });
 
-// Blog cover image storage
 const blogStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'reyarts/blogs',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ quality: 'auto', fetch_format: 'auto' }],
-  },
+  params: { folder: 'reyarts/blogs', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
 });
 
-// Exhibition image storage
 const exhibitionStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'reyarts/exhibitions',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ quality: 'auto', fetch_format: 'auto' }],
-  },
+  params: { folder: 'reyarts/exhibitions', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
 });
 
-// Timeline image storage
 const timelineStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'reyarts/timeline',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ quality: 'auto', fetch_format: 'auto' }],
-  },
+  params: { folder: 'reyarts/timeline', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
 });
 
 const uploadArtwork = multer({ storage: artworkStorage });
@@ -53,10 +33,4 @@ const uploadBlog = multer({ storage: blogStorage });
 const uploadExhibition = multer({ storage: exhibitionStorage });
 const uploadTimeline = multer({ storage: timelineStorage });
 
-module.exports = {
-  cloudinary,
-  uploadArtwork,
-  uploadBlog,
-  uploadExhibition,
-  uploadTimeline,
-};
+module.exports = { cloudinary, uploadArtwork, uploadBlog, uploadExhibition, uploadTimeline };
