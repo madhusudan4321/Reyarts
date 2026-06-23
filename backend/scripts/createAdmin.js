@@ -13,7 +13,11 @@
  */
 
 require('dotenv').config();
+const dns = require('dns');
 const mongoose = require('mongoose');
+
+// Force Google DNS — router's default DNS doesn't support MongoDB Atlas SRV records
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 const bcrypt = require('bcryptjs');
 
 // ── Connect to MongoDB ───────────────────────────────────────────────────────
