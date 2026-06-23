@@ -18,40 +18,23 @@ const mongoose = require('mongoose');
 
 // Force Google DNS — router's default DNS doesn't support MongoDB Atlas SRV records
 dns.setServers(['8.8.8.8', '8.8.4.4']);
-const bcrypt = require('bcryptjs');
+
+// ── Use the REAL User model (has bcrypt pre-save hook) ───────────────────────
+const User = require('../models/User');
 
 // ── Connect to MongoDB ───────────────────────────────────────────────────────
 const connectDB = async () => {
-  // Ensure the URI contains the database name "reyarts"
   let uri = process.env.MONGO_URI;
   if (!uri) {
     console.error('❌ MONGO_URI is not set in .env');
     process.exit(1);
   }
-
-  // If URI has no database name before "?", inject "reyarts"
   if (uri.includes('mongodb.net/?') || uri.endsWith('.net/')) {
     uri = uri.replace('.net/?', '.net/reyarts?').replace('.net/', '.net/reyarts');
   }
-
-  await mongoose.connect(uri);
+  await mongoose.connect(uri, { serverSelectionTimeoutMS: 10000 });
   console.log('✅ Connected to MongoDB');
 };
-
-// ── Inline User Schema (to avoid circular imports) ───────────────────────────
-const userSchema = new mongoose.Schema(
-  {
-    name:     { type: String, required: true },
-    email:    { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
-    role:     { type: String, enum: ['user', 'admin'], default: 'user' },
-    avatar:   { type: String, default: '' },
-    bio:      { type: String, default: '' },
-  },
-  { timestamps: true }
-);
-
-const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 const createAdmin = async () => {
@@ -69,30 +52,18 @@ const createAdmin = async () => {
       process.exit(1);
     }
 
-    // Check if admin already exists
+    // Delete any existing admin with this email (clears previously double-hashed password)
     const existing = await User.findOne({ email: adminEmail });
     if (existing) {
-      if (existing.role === 'admin') {
-        console.log(`\n⚠️  Admin already exists: ${existing.name} (${existing.email})`);
-        console.log('   No changes made.\n');
-      } else {
-        // Upgrade existing user to admin
-        existing.role = 'admin';
-        await existing.save();
-        console.log(`\n✅ Upgraded existing user to admin: ${existing.name} (${existing.email})\n`);
-      }
-      process.exit(0);
+      await User.deleteOne({ email: adminEmail });
+      console.log(`🗑️  Removed existing user: ${adminEmail} (recreating with correct password hash)`);
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(adminPassword, salt);
-
-    // Create admin user
+    // Create admin — the User model's pre('save') hook hashes the password correctly
     const admin = await User.create({
       name: 'Reya Saran',
       email: adminEmail,
-      password: hashedPassword,
+      password: adminPassword,
       role: 'admin',
       bio: 'Artist, painter, and storyteller.',
     });
