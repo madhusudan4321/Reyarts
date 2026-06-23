@@ -55,7 +55,7 @@ export default function About() {
           </h1>
           <div className="gold-divider mx-auto mb-6" style={{ width: '80px' }} />
           <p style={{ fontFamily: 'Cormorant Garamond, serif' }} className="text-2xl text-[#cccccc] italic max-w-2xl mx-auto">
-            --Painting Stories, Reading Worlds--
+            Painting Stories, Reading Worlds!
           </p>
         </motion.div>
 
