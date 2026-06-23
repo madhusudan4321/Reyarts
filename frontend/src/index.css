@@ -301,20 +301,186 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
 }
 
-/* ── Light mode ── */
-.light-mode body,
+/* ══════════════════════════════════════════════════════
+   LIGHT MODE — Comprehensive Theme Overrides
+   ══════════════════════════════════════════════════════ */
+
+/* ── Base ── */
 body.light-mode {
-  background-color: var(--color-ivory-100);
-  color: var(--color-charcoal-800);
+  background-color: #f5f0e8;
+  color: #1a1a1a;
 }
 
+/* ── Scrollbar ── */
+body.light-mode ::-webkit-scrollbar-track {
+  background: #efe8de;
+}
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: var(--color-gold-700);
+}
+
+/* ── Skeleton loading ── */
+body.light-mode .skeleton {
+  background: linear-gradient(
+    to right,
+    #e8e0d4 8%,
+    #d8cfc4 18%,
+    #e8e0d4 33%
+  );
+  background-size: 800px 104px;
+}
+
+/* ── Card surfaces ── */
 body.light-mode .card-surface {
-  background: #fff;
-  border-color: rgba(201,168,76,0.2);
+  background: #ffffff;
+  border-color: rgba(180, 150, 80, 0.2);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+body.light-mode .card-surface:hover {
+  border-color: rgba(180, 150, 80, 0.4);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
+/* ── Input fields ── */
 body.light-mode .input-field {
-  background: #fff;
-  border-color: var(--color-ivory-600);
-  color: var(--color-charcoal-800);
+  background: #ffffff;
+  border-color: #d8cfc4;
+  color: #1a1a1a;
 }
+body.light-mode .input-field:focus {
+  border-color: var(--color-gold-600);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.12);
+}
+body.light-mode .input-field::placeholder {
+  color: #a8998a;
+}
+body.light-mode select.input-field option {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* ── Navbar ── */
+body.light-mode nav,
+body.light-mode header {
+  background: rgba(245, 240, 232, 0.95) !important;
+  border-bottom-color: rgba(180, 150, 80, 0.15) !important;
+}
+body.light-mode nav a,
+body.light-mode header a {
+  color: #333333 !important;
+}
+body.light-mode nav a:hover {
+  color: var(--color-gold-700) !important;
+}
+
+/* ── Ghost button in light mode ── */
+body.light-mode .btn-ghost {
+  color: var(--color-gold-800);
+  border-color: var(--color-gold-700);
+}
+body.light-mode .btn-ghost:hover {
+  background: var(--color-gold-700);
+  color: #ffffff;
+}
+
+/* ── Tag badges ── */
+body.light-mode .tag-badge {
+  background: rgba(180, 150, 80, 0.12);
+  color: var(--color-gold-800);
+  border-color: rgba(180, 150, 80, 0.25);
+}
+
+/* ── Section label ── */
+body.light-mode .section-label {
+  color: var(--color-gold-800);
+}
+
+/* ── Modal / overlay backgrounds ── */
+body.light-mode [class*="bg-[#1a1a1a]"],
+body.light-mode [class*="bg-[#141414]"],
+body.light-mode [class*="bg-[#222222]"] {
+  background-color: #ffffff !important;
+}
+
+/* ── Admin sidebar & layout ── */
+body.light-mode aside {
+  background: #ffffff !important;
+  border-right-color: rgba(180,150,80,0.15) !important;
+}
+body.light-mode aside a {
+  color: #555555 !important;
+}
+body.light-mode aside a:hover,
+body.light-mode aside a.active {
+  color: var(--color-gold-800) !important;
+  background: rgba(180,150,80,0.08) !important;
+}
+
+/* ── Table rows ── */
+body.light-mode table tr {
+  border-color: rgba(0,0,0,0.06) !important;
+}
+body.light-mode table th {
+  color: #888888 !important;
+}
+body.light-mode table td {
+  color: #333333 !important;
+}
+body.light-mode table tr:hover {
+  background: rgba(180,150,80,0.04) !important;
+}
+
+/* ── Text color overrides for hardcoded values ── */
+body.light-mode [class*="text-[#f5f0e8]"] { color: #1a1a1a !important; }
+body.light-mode [class*="text-[#cccccc]"] { color: #333333 !important; }
+body.light-mode [class*="text-[#999999]"] { color: #555555 !important; }
+body.light-mode [class*="text-[#777777]"] { color: #666666 !important; }
+body.light-mode [class*="text-[#555555]"] { color: #888888 !important; }
+body.light-mode [class*="text-[#444444]"] { color: #999999 !important; }
+
+/* ── Background overrides for hardcoded dark values ── */
+body.light-mode [class*="bg-[#1a1a1a]"] { background-color: #ffffff !important; }
+body.light-mode [class*="bg-[#141414]"] { background-color: #f5f0e8 !important; }
+body.light-mode [class*="bg-[#222222]"] { background-color: #f0ebe2 !important; }
+body.light-mode [class*="bg-[#0d0d0d]"] { background-color: #efe8de !important; }
+
+/* ── Border overrides ── */
+body.light-mode [class*="border-[rgba(201,168,76,0.1)"] {
+  border-color: rgba(180,150,80,0.2) !important;
+}
+body.light-mode [class*="border-[rgba(255,255,255,0.04)"] {
+  border-color: rgba(0,0,0,0.06) !important;
+}
+
+/* ── Artwork card overlay — keep dark for readability ── */
+body.light-mode .artwork-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.1) 50%,
+    transparent 100%
+  );
+}
+
+/* ── Footer ── */
+body.light-mode footer {
+  background: #1a1a1a !important;
+  color: #cccccc !important;
+}
+body.light-mode footer a {
+  color: #cccccc !important;
+}
+body.light-mode footer a:hover {
+  color: var(--color-gold-400) !important;
+}
+
+/* ── Image drop zone ── */
+body.light-mode [style*="rgba(255,255,255,0.02)"] {
+  background: rgba(0,0,0,0.02) !important;
+}
+
+/* ── Checkbox ── */
+body.light-mode input[type="checkbox"] {
+  accent-color: var(--color-gold-700);
+}
+
