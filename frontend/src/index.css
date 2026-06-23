@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Color Palette ── */
+  --color-charcoal-950: #0d0d0d;
+  --color-charcoal-900: #141414;
+  --color-charcoal-800: #1a1a1a;
+  --color-charcoal-700: #222222;
+  --color-charcoal-600: #2a2a2a;
+  --color-charcoal-500: #333333;
+  --color-charcoal-400: #555555;
+  --color-charcoal-300: #777777;
+  --color-charcoal-200: #999999;
+  --color-charcoal-100: #cccccc;
+
+  --color-gold-900: #7a5c1e;
+  --color-gold-800: #9a7428;
+  --color-gold-700: #b58c34;
+  --color-gold-600: #c9a84c;
+  --color-gold-500: #d4b568;
+  --color-gold-400: #dfc284;
+  --color-gold-300: #e8cfa0;
+  --color-gold-200: #f0dcbc;
+  --color-gold-100: #f7edd8;
+
+  --color-ivory-900: #8a8070;
+  --color-ivory-800: #a8998a;
+  --color-ivory-700: #c2b5a6;
+  --color-ivory-600: #d8cfc4;
+  --color-ivory-500: #e8e0d4;
+  --color-ivory-400: #efe8de;
+  --color-ivory-300: #f2ece4;
+  --color-ivory-200: #f5f0e8;
+  --color-ivory-100: #faf7f2;
+
+  --color-rose-900: #5c2a2a;
+  --color-rose-800: #7a3a3a;
+  --color-rose-700: #944a4a;
+  --color-rose-600: #b87c7c;
+  --color-rose-500: #c89090;
+  --color-rose-400: #d4a0a0;
+  --color-rose-300: #dfb8b8;
+  --color-rose-200: #ead0d0;
+  --color-rose-100: #f5e8e8;
+
+  /* ── Fonts ── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-accent: 'Cormorant Garamond', Georgia, serif;
+
+  /* ── Spacing / Sizing ── */
+  --spacing-section: 5rem;
+
+  /* ── Border Radius ── */
+  --radius-artwork: 4px;
+  --radius-card: 8px;
+  --radius-button: 2px;
+}
+
+/* ── Base Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-charcoal-800);
+  color: var(--color-ivory-200);
+  min-height: 100vh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: var(--color-gold-600);
+  color: var(--color-charcoal-800);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-charcoal-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-700);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-600);
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+/* ── Gold divider ── */
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold-600), var(--color-gold-400));
+  margin: 1rem 0;
+}
+
+/* ── Shimmer loading animation ── */
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    to right,
+    var(--color-charcoal-700) 8%,
+    var(--color-charcoal-600) 18%,
+    var(--color-charcoal-700) 33%
+  );
+  background-size: 800px 104px;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: var(--radius-card);
+}
+
+/* ── Page fade transition ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ── Artwork hover overlay ── */
+.artwork-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.artwork-card img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.artwork-card:hover img {
+  transform: scale(1.06);
+}
+
+.artwork-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.2) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+}
+
+.artwork-card:hover .artwork-overlay {
+  opacity: 1;
+}
+
+/* ── Gold button ── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-gold-700), var(--color-gold-500));
+  color: var(--color-charcoal-800);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, var(--color-gold-600), var(--color-gold-400));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.3);
+}
+
+/* ── Ghost button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-gold-600);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.75rem;
+  border: 1px solid var(--color-gold-700);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  background: var(--color-gold-600);
+  color: var(--color-charcoal-800);
+  transform: translateY(-1px);
+}
+
+/* ── Section label ── */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+
+/* ── Card surface ── */
+.card-surface {
+  background: var(--color-charcoal-700);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius-card);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-surface:hover {
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-2px);
+}
+
+/* ── Input fields ── */
+.input-field {
+  width: 100%;
+  background: var(--color-charcoal-700);
+  border: 1px solid var(--color-charcoal-500);
+  border-radius: var(--radius-card);
+  padding: 0.75rem 1rem;
+  color: var(--color-ivory-200);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--color-gold-600);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.1);
+}
+
+.input-field::placeholder {
+  color: var(--color-charcoal-300);
+}
+
+/* ── Tag badge ── */
+.tag-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+  background: rgba(201,168,76,0.1);
+  color: var(--color-gold-400);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+
+/* ── Fullscreen viewer ── */
+.fullscreen-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Light mode ── */
+.light-mode body,
+body.light-mode {
+  background-color: var(--color-ivory-100);
+  color: var(--color-charcoal-800);
+}
+
+body.light-mode .card-surface {
+  background: #fff;
+  border-color: rgba(201,168,76,0.2);
+}
+
+body.light-mode .input-field {
+  background: #fff;
+  border-color: var(--color-ivory-600);
+  color: var(--color-charcoal-800);
+}
