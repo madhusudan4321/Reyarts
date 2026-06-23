@@ -68,7 +68,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-[#999999] leading-relaxed">
               <p>
-                I'm a painter living at the crossroads of visual art and literature. My canvases are shaped by the stories I've read, the emotions I've felt, and the quiet moments I've observed.
+                I'm an Artist living at the crossroads of visual art and literature. My canvases are shaped by the stories I've read, the emotions I've felt, and the quiet moments I've observed.
               </p>
               <p>
                 I work primarily in oils and watercolors, drawn to their unique ability to capture both the precision of a thought and the fluidity of a feeling. Each painting begins not with a sketch, but with a sentence — a feeling I want to translate into color.
